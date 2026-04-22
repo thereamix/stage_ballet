@@ -12,8 +12,6 @@ import UnserStudio from "./headings/UnserStudio.svg?react"
 
 const BASE = import.meta.env.BASE_URL;
 
-console.log(BASE);
-
 const studioImages = [
     { src: `${BASE}images/Studio1.jpg`, alt: 'studio1' },
     { src: `${BASE}images/Studio2.jpg`, alt: 'studio2' },
@@ -79,6 +77,11 @@ export default function HomePage() {
                     </h1>
                     <Link to="/courses" className="btn btn-light">
                         MITGLIED WERDEN
+                        {
+                            <p>
+                                {BASE}
+                            </p>
+                        }
                     </Link>
                 </div>
             </section>
