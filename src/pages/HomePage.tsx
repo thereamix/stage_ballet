@@ -77,11 +77,6 @@ export default function HomePage() {
                     </h1>
                     <Link to="/courses" className="btn btn-light">
                         MITGLIED WERDEN
-                        {
-                            <p>
-                                {BASE}
-                            </p>
-                        }
                     </Link>
                 </div>
             </section>
