@@ -13,11 +13,11 @@ import UnserStudio from "./headings/UnserStudio.svg?react"
 const BASE = import.meta.env.BASE_URL;
 
 const studioImages = [
-    { src: `${BASE}images/studio/Studio1.jpg`, alt: 'studio1' },
-    { src: `${BASE}images/studio/Studio2.jpg`, alt: 'studio2' },
-    { src: `${BASE}images/studio/Studio3.png`, alt: 'studio3' },
-    { src: `${BASE}images/studio/Studio4.png`, alt: 'studio4' },
-    { src: `${BASE}images/studio/Studio5.jpg`, alt: 'studio5' },
+    { src: `${BASE}images/Studio1.jpg`, alt: 'studio1' },
+    { src: `${BASE}images/Studio2.jpg`, alt: 'studio2' },
+    { src: `${BASE}images/Studio3.png`, alt: 'studio3' },
+    { src: `${BASE}images/Studio4.png`, alt: 'studio4' },
+    { src: `${BASE}images/Studio5.jpg`, alt: 'studio5' },
 ]
 
 const courses = [
@@ -65,7 +65,7 @@ export default function HomePage() {
                     className="hero-bg"
                     style={{
                         backgroundImage:
-                            'url(./images/homepage_background.png)',
+                            `url(${BASE}images/homepage_background.png)`,
                     }}
                 />
                 <div className="hero-grain" />
