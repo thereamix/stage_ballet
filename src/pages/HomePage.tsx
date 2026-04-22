@@ -10,7 +10,7 @@ import UnsereKurse from "./headings/UnsereKurse.svg?react"
 // @ts-expect-error
 import UnserStudio from "./headings/UnserStudio.svg?react"
 
-const BASE = import.meta.env.BASE_URL;
+const BASE = import.meta.env.BASE_URL + "/";
 
 const studioImages = [
     { src: `${BASE}images/Studio1.jpg`, alt: 'studio1' },
