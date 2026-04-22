@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>stage_ballet</title>
+    <script>
+        // GitHub Pages SPA redirect trick.
+        // Encodes the current URL into a query param and redirects to index.html,
+        // which then restores the URL before React Router boots.
+        var l = window.location;
+        l.replace(
+            l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+            l.pathname.split('/').slice(0, 1 + 1).join('/') + '/?p=' +
+            encodeURIComponent(l.pathname.slice(1) + (l.search ? '&' + l.search.slice(1) : '') + l.hash)
+        );
+    </script>
+</head>
+<body></body>
+</html>
