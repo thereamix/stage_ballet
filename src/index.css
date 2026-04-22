@@ -1,0 +1,1044 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --black: #0a0a0a;
+    --cream: #f4f0e6;
+    --cream-dark: #ece6d4;
+    --red: #c8293a;
+    --text-dark: #1a1a1a;
+    --text-light: #f4f0e6;
+    --serif: 'Cormorant Garamond', serif;
+    --display: 'Bebas Neue', sans-serif;
+    --header-h: 62px;
+    --ease-out: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+}
+
+html, body, #root {
+    height: 100%;
+}
+
+body {
+    font-family: var(--serif);
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* ===================== LAYOUT ===================== */
+
+.layout {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===================== HEADER ===================== */
+
+.header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    z-index: 200;
+    transition: background 0.4s ease, color 0.3s ease, border-color 0.4s ease;
+    border-bottom: 1px solid transparent;
+}
+
+.header--light {
+    background: transparent;
+    color: var(--text-light);
+}
+
+.header--dark {
+    background: rgba(244, 240, 230, 0.96);
+    color: var(--text-dark);
+    border-bottom-color: rgba(0,0,0,0.08);
+    backdrop-filter: blur(8px);
+}
+
+.header--menu-open {
+    background: transparent !important;
+    color: var(--text-light) !important;
+    border-bottom-color: transparent !important;
+}
+
+.header--dark .logo svg    { color: #1E1E1C; }
+.header--light .logo svg   { color: #1E1E1C; }
+.header--menu-open .logo svg { color: #EDE9E4; }
+
+/* ===================== LOGO ===================== */
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    z-index: 201;
+    fill: black;
+}
+
+.logo-stage {
+    font-family: var(--display);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+}
+
+.logo-ballet {
+    font-family: var(--display);
+    font-size: 19px;
+    letter-spacing: 0.1em;
+}
+
+/* ===================== BURGER ===================== */
+
+.burger {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    position: relative;
+    z-index: 201;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.burger span {
+    display: block;
+    width: 26px;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.38s var(--ease-out), opacity 0.25s ease, width 0.3s ease;
+    transform-origin: center;
+}
+
+.burger--open span {
+    background: #EDE9E4;
+}
+
+.burger--open span:nth-child(1) {
+    transform: translateY(7.5px) rotate(45deg);
+}
+.burger--open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+}
+.burger--open span:nth-child(3) {
+    transform: translateY(-7.5px) rotate(-45deg);
+}
+
+/* ===================== MENU OVERLAY ===================== */
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--black);
+    z-index: 150;
+    display: flex;
+    flex-direction: column;
+    padding: calc(var(--header-h) + 20px) 32px 52px;
+    transform: translateX(100%);
+    transition: transform 0.55s var(--ease-out);
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.menu-overlay--open {
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* Grain texture on menu */
+.menu-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ===================== MENU NAV ===================== */
+
+.menu-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.menu-nav-item {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    color: #9f9d9a;
+    font-family: "AzeretMono";
+    max-font-size: 58px;
+    font-size: 10vw;
+    letter-spacing: 0.02em;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    transform: translateX(40px);
+    transition: color 0.2s ease;
+}
+
+.menu-overlay--open .menu-nav-item {
+    animation: menuItemIn 0.55s var(--ease-out) forwards;
+}
+
+@keyframes menuItemIn {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.menu-nav-item--active {
+    color: #EDE9E4;
+}
+
+.menu-nav-item--active .menu-num {
+    color: #EDE9E4;
+    opacity: 0.5;
+}
+
+.menu-num {
+    font-family: "AzeretMono";
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.25);
+    padding-bottom: 6px;
+}
+
+/* ===================== MENU FOOTER ===================== */
+
+.menu-footer {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    opacity: 0;
+    padding-top: 24px;
+}
+
+.menu-overlay--open .menu-footer {
+    animation: menuItemIn 0.5s 0.55s var(--ease-out) forwards;
+}
+
+.menu-footer a {
+    color: rgba(255,255,255,0.4);
+    font-family: "AzeretMono";
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.menu-footer a:active { color: var(--text-light); }
+
+.menu-footer-divider {
+    width: 1px;
+    height: 14px;
+    background: rgba(255,255,255,0.15);
+}
+
+/* ===================== MAIN ===================== */
+
+.main-content {
+    padding-top: var(--header-h);
+    flex: 1;
+}
+
+/* ===================== BUTTONS ===================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "AzeretMono";
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: black;
+    padding: 13px 28px;
+    border: 1px solid black;
+    border-radius: 25px;
+    transition: background 0.28s, color 0.28s, transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-light {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "AzeretMono";
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #EDE9E4;
+    padding: 13px 28px;
+    border: 1px solid white;
+    border-radius: 25px;
+    transition: background 0.28s, color 0.28s, transform 0.15s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-light:active {
+    transform: scale(0.97);
+}
+
+.btn:active { transform: scale(0.97); }
+
+/* ===================== HOME — HERO ===================== */
+
+.hero {
+    position: relative;
+    height: calc(100svh - var(--header-h));
+    min-height: 220px;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    /* Vertikal zentriert: */
+    justify-content: center;
+    /* Horizontal LINKS ausgerichtet: */
+    align-items: flex-start;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 20%;
+    opacity: 0.5;
+}
+
+/* Grain overlay */
+.hero-grain {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+            to bottom,
+            rgba(10,10,10,0.1) 0%,
+            rgba(10,10,10,0) 35%,
+            rgba(10,10,10,0.6) 70%,
+            rgba(10,10,10,0.92) 100%
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    /* Gib dem Content links genug Luft zum Rand */
+    padding: 0 40px;
+    color: var(--text-light);
+    /* Text-Inhalt auch linksbündig: */
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-label {
+    font-family: "AzeretMono";
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 16px;
+}
+
+.hero-headline {
+    /* Optional: Falls das SVG ein margin-bottom hat, hier anpassen */
+    margin-bottom: 32px;
+}
+
+.hero-headline em {
+    font-family: "AzeretMono";
+    font-style: italic;
+    font-weight: 300;
+    display: block;
+}
+
+.hero-headline strong {
+    font-family: "AzeretMono";
+    font-weight: 400;
+    font-size: clamp(52px, 14vw, 62px);
+    letter-spacing: 0.03em;
+    display: block;
+}
+
+/* ===================== HOME — COURSES ===================== */
+
+.courses-section {
+    background: var(--cream);
+    padding-top: 44px;
+    padding-bottom: 16px;
+}
+
+.courses-section-header {
+    padding: 0 24px 36px;
+}
+
+.section-subtitle {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    opacity: 0.75;
+    margin-top: 14px;
+}
+
+.course-card {
+    /* Kein position: relative mehr nötig für das Overlay */
+    margin-bottom: 48px; /* Mehr Abstand zwischen den Kursen */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-card-img {
+    width: 100%;
+    height: 280px; /* Höhe kannst du nach Belieben anpassen */
+    object-fit: cover;
+    display: block;
+    filter: grayscale(10%); /* Weniger Grau wirkt oft lebendiger bei Text darunter */
+    transition: transform 0.6s ease;
+}
+
+.course-card:active .course-card-img {
+    transform: scale(1.02);
+}
+
+.course-card-overlay {
+    /* WICHTIG: Nicht mehr absolut, sondern normaler Block-Fluss */
+    position: static;
+    padding: 24px 24px 0; /* Padding links/rechts/oben */
+
+    /* Farben anpassen, da der Hintergrund jetzt hell ist! */
+    color: var(--black);
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.course-card-tag {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--black);
+    opacity: 0.5;
+    margin-bottom: 12px;
+    font-family: "AzeretMono";
+}
+
+.course-card-title {
+    font-family: "AzeretMono";
+    font-size: 28px;
+    color: var(--black);
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+    line-height: 1.1;
+}
+.course-card-text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.35;
+    color: var(--black);
+    opacity: 0.9;
+    margin-bottom: 20px;
+    font-family: "AzeretMono";
+}
+
+.course-card .btn-light {
+    align-self: flex-start; /* Button nicht über ganze Breite */
+    border: 1px solid var(--black);
+    color: var(--black);
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+
+/* ===================== HOME — STUDIO ===================== */
+
+.studio-section {
+    background: var(--black);
+    padding: 34px 0 56px;
+    color: var(--text-light);
+}
+
+.studio-header {
+    padding: 0 24px 32px;
+}
+
+.studio-scroll {
+    display: flex;
+    gap: 6px;
+    padding: 0 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+.studio-scroll::-webkit-scrollbar { display: none; }
+
+.studio-img {
+    flex-shrink: 0;
+    width: 72vw;
+    height: 230px;
+    object-fit: cover;
+    scroll-snap-align: start;
+    filter: grayscale(15%);
+}
+
+.studio-dots {
+    display: flex;
+    gap: 6px;
+    padding: 20px 24px 0;
+}
+
+.studio-dot {
+    width: 20px;
+    height: 2px;
+    background: #D9D9D999;
+    opacity: 0.6;
+    transition: background 0.3s;
+}
+.studio-dot.active {
+    background: #D9D9D9;
+    width: 32px;
+}
+
+/* ===================== FOOTER ===================== */
+
+.site-footer {
+    background: var(--black);
+    color: var(--text-light);
+    padding: 52px 24px 40px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-logo-stage {
+    font-family: "AzeretMono";
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    opacity: 0.5;
+}
+
+.footer-logo-ballet {
+    font-family: "AzeretMono";
+    font-size: 22px;
+    letter-spacing: 0.08em;
+}
+
+.footer-social {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.footer-social span {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.35;
+    font-family: "AzeretMono";
+}
+
+.footer-social a {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    font-family: "AzeretMono";
+    transition: opacity 0.2s;
+}
+
+.footer-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 32px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 28px;
+}
+
+.footer-nav a {
+    font-family: "AzeretMono";
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.footer-copy {
+    font-size: 11px;
+    opacity: 0.25;
+    letter-spacing: 0.06em;
+    font-family: "AzeretMono";
+}
+
+/* ===================== PAGE HEROES ===================== */
+
+.page-hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    color: black;
+    font-family: "AlpinoRegular";
+    overflow: hidden;
+    font-size: 6vw;
+    margin-top: 30px;
+    margin-left: 24px;
+}
+
+.team-heading {
+    margin-top: 40px;
+    padding: 0px 24px;
+}
+
+.page-hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.38;
+    filter: grayscale(20%);
+}
+
+.page-hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 20%, rgba(10,10,10,0.8) 100%);
+}
+
+.page-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.page-hero-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.45;
+    margin-bottom: 10px;
+    font-family: var(--serif);
+}
+
+/* ===================== ABOUT ===================== */
+
+.ueberuns-container {
+    margin-top: 30px;
+    margin-left: 24px;
+}
+
+.about-body {
+    background: var(--cream);
+}
+
+.about-intro {
+    padding: 20px 24px 20px;
+}
+
+.about-text {
+    font-family: 'AzeretMono';
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.35;
+    opacity: 0.85;
+    margin-bottom: 24px;
+}
+
+.about-red-line {
+    width: 36px;
+    height: 1.5px;
+    background: var(--red);
+    margin: 32px 0;
+}
+
+.about-pullquote {
+    font-size: clamp(22px, 6vw, 28px);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.45;
+    color: var(--text-dark);
+    border-left: 2px solid var(--red);
+    padding: 12px 20px;
+    margin: 36px 0;
+}
+
+.about-values {
+    color: var(--text-light);
+    padding: 52px 24px;
+}
+
+.about-values-heading {
+    font-size: clamp(32px, 9vw, 44px);
+    margin-bottom: 36px;
+}
+
+.value-item {
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.value-item:first-of-type { border-top: 1px solid rgba(255,255,255,0.08); }
+
+.value-num {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 11px;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+}
+
+.value-title {
+    font-family: var(--display);
+    font-size: 20px;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+}
+
+.value-text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.75;
+    opacity: 0.65;
+}
+
+/* ===================== TEAM ===================== */
+
+.team-body {
+    background: var(--cream);
+}
+
+.team-intro-section {
+    padding: 20px 24px 0;
+    font-family: "AzeretMono";
+}
+
+.team-intro-text {
+    font-family: 'AzeretMono';
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.35;
+    opacity: 0.85;
+    margin-bottom: 16px;
+}
+
+.team-members {
+    padding: 0 0 56px;
+}
+
+.member-card {
+    margin-top: 40px;
+    background: var(--cream);
+}
+
+.member-photo-wrap {
+    position: relative;
+    overflow: hidden;
+}
+
+.member-photo {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    object-position: center center;
+    filter: grayscale(15%);
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.member-photo-wrap:active .member-photo { transform: scale(1.03); }
+
+.member-info {
+    padding: 28px 24px 0;
+}
+
+.member-info.dark {
+    background: var(--black);
+    color: var(--text-light);
+}
+
+.member-role {
+    font-family: "AzeretMono";
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+}
+
+.member-name {
+    font-family: "AzeretMono";
+    text-decoration: underline;
+    font-size: 30px;
+    letter-spacing: 0.04em;
+    margin-bottom: 18px;
+    line-height: 1;
+}
+
+.member-bio {
+    font-family: "AzeretMono";
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.35;
+    opacity: 0.8;
+    margin-top: 18px;
+}
+
+/* ===================== COURSES PAGE ===================== */
+
+.courses-page-body {
+    background: var(--cream);
+}
+
+.courses-list-section {
+    padding-bottom: 12px;
+    margin-top: 40px;
+}
+
+.course-full {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.course-full-img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%);
+}
+
+.course-full-content {
+    padding: 30px 24px 36px;
+}
+
+.course-full-content.dark {
+    background: var(--black);
+    color: var(--text-light);
+}
+
+.course-badge {
+    display: inline-block;
+    font-family: "AzeretMono";
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid currentColor;
+    padding: 4px 12px;
+    opacity: 0.55;
+    margin-bottom: 14px;
+}
+
+.course-full-title {
+    font-family: "AzeretMono";
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    margin-bottom: 14px;
+    line-height: 1;
+}
+
+.course-full-text {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.35;
+    opacity: 0.82;
+    margin-bottom: 24px;
+    font-family: "AzeretMono";
+}
+
+.course-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.course-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.course-meta-label {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.4;
+    font-family: "AzeretMono";
+}
+
+.course-meta-value {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+/* ===================== FAQ ===================== */
+
+.faq-body {
+    background: var(--cream);
+}
+
+.faq-intro {
+    padding: 15px 24px 26px;
+}
+
+.faq-intro-text {
+    font-family: 'AzeretMono';
+    font-size: 14px;
+    line-height: 1.35;
+    opacity: 0.8;
+}
+
+.faq-list {
+    padding: 0 24px 64px;
+}
+
+.faq-item {
+    margin-bottom: 40px; /* Schön viel Platz zwischen den Fragen */
+}
+
+.faq-question {
+    font-size: 24px;
+    color: #000000; /* Deine helle Farbe */
+    margin-bottom: 12px;
+    font-weight: 600;
+    font-family: "AzeretMono";
+    text-decoration: underline;
+    line-height: 1.35;
+}
+
+.faq-question-btn {
+    width: 100%;
+    text-align: left;
+    padding: 22px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    font-family: var(--serif);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--text-dark);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.faq-icon {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    border: 1px solid rgba(0,0,0,0.18);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    transition: transform 0.35s var(--ease-out), border-color 0.25s;
+    color: var(--red);
+    font-size: 18px;
+    line-height: 1;
+}
+
+.faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    border-color: var(--red);
+}
+
+.faq-answer {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s var(--ease-out);
+}
+
+.faq-item.open .faq-answer {
+    grid-template-rows: 1fr;
+}
+
+.faq-answer-inner {
+    overflow: hidden;
+}
+
+.faq-answer-text {
+    font-family: AzeretMono;
+    font-size: 14px;
+    line-height: 1.35;
+    color: rgba(0, 0, 0, 0.8); /* Etwas transparenter für bessere Lesbarkeit */
+}
+
+/* ===================== CTA BANNER ===================== */
+
+.cta-banner {
+    background: var(--red);
+    color: var(--text-light);
+    padding: 52px 24px;
+    text-align: center;
+}
+
+.cta-banner-heading {
+    font-size: clamp(32px, 9vw, 44px);
+    margin-bottom: 16px;
+}
+
+.cta-banner-text {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.7;
+    opacity: 0.85;
+    margin-bottom: 28px;
+}
+
+.btn-white {
+    color: var(--black);
+    background: var(--text-light);
+    border-color: var(--text-light);
+}

@@ -9,7 +9,7 @@
 .home__bg {
     position: absolute;
     inset: 0;
-    background-image: url('./images/homepage_background.png');
+    background-image: url('../../public/images/homepage_background.png');
     background-size: cover;
     background-position: center top;
     z-index: 0;
