@@ -10,27 +10,14 @@ import UnsereKurse from "./headings/UnsereKurse.svg?react"
 // @ts-expect-error
 import UnserStudio from "./headings/UnserStudio.svg?react"
 
+const BASE = import.meta.env.BASE_URL;
+
 const studioImages = [
-    {
-        src: './images/studio/Studio1.jpg',
-        alt: 'studio1',
-    },
-    {
-        src: './images/studio/Studio2.jpg',
-        alt: 'studio2',
-    },
-    {
-        src: './images/studio/Studio3.png',
-        alt: 'studio3',
-    },
-    {
-        src: './images/studio/Studio4.png',
-        alt: 'studio4',
-    },
-    {
-        src: './images/studio/Studio5.jpg',
-        alt: 'studio5'
-    }
+    { src: `${BASE}images/studio/Studio1.jpg`, alt: 'studio1' },
+    { src: `${BASE}images/studio/Studio2.jpg`, alt: 'studio2' },
+    { src: `${BASE}images/studio/Studio3.png`, alt: 'studio3' },
+    { src: `${BASE}images/studio/Studio4.png`, alt: 'studio4' },
+    { src: `${BASE}images/studio/Studio5.jpg`, alt: 'studio5' },
 ]
 
 const courses = [
@@ -38,23 +25,23 @@ const courses = [
         tag: 'Klassisches Ballett',
         title: 'Ballet Technique',
         text: 'Meistere die Grundlagen des klassischen Tanzes. In diesem Kurs kombinieren wir anatomische Präzision mit künstlerischem Ausdruck, um Körpergefühl und Eleganz auf ein neues Level zu heben.',
-        tip: 'Für diesen Kurs Benötigst du Vorkenntnisse im Ballet!',
-        img: './images/Ballet_Technique.jpg',
+        tip: 'Für diesen Kurs benötigst du Vorkenntnisse im Ballet!',
+        img: `${BASE}images/Ballet_Technique.jpg`,
         path: '/courses',
     },
     {
         tag: 'Erwachsene Anfänger',
         title: 'Bereit für dein erstes Plié?',
         text: 'Unser Kurs führt dich Schritt für Schritt durch die Welt des klassischen Tanzes – von der präzisen Arbeit an der Stange bis hin zu graziösen Sprüngen im Raum. Verbessere deine Haltung, stärke deine Muskulatur und bringe deinen Körper in Bestform.',
-        img: './images/Plie.png',
+        img: `${BASE}images/Plie.png`,
         path: '/courses',
     },
     {
         tag: 'Kinder ab 4 Jahren',
         title: 'Für unsere Kleinen',
         text: 'In unserem Ballettunterricht für Kinder entdecken die Kleinen spielerisch die Welt des Tanzes. Hier werden aus kleinen Hüpfern graziöse Sprünge!',
-        tip: 'Machen sie eine Kostenlose  „Probestunde“bei uns, bequem über die online Anmeldung.',
-        img: './images/KleinenKurs.jpg',
+        tip: 'Machen Sie eine kostenlose „Probestunde" bei uns, bequem über die Online-Anmeldung.',
+        img: `${BASE}images/KleinenKurs.jpg`,
         path: '/courses',
     },
 ]

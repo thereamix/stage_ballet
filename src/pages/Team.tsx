@@ -4,6 +4,7 @@ import UnserTeam from './headings/DasTeam.svg?react'
 
 const members = [
     {
+        id: 1,
         role: 'CEO',
         name: 'Tatjana Hajdinjak',
         bio: 'Mit nur 20 Jahren steht Tatjana Hajdinjak als Gründerin und CEO hinter der Vision von Stage Ballet. Ihre Leidenschaft für den Tanz und ihr klares Ziel, die Lücke zwischen Training und Bühne zu schließen, prägen das Unternehmen maßgeblich.',
@@ -12,6 +13,7 @@ const members = [
         dark: false,
     },
     {
+        id: 2,
         role: 'CTO & CFO',
         name: 'Julian Monschein',
         bio: 'Julian ist ein zentraler Teil unseres Teams und verantwortet die Bereiche IT, Marketing und Finanzen. Mit seinem Verständnis für digitale Prozesse und moderne Kommunikation sorgt er dafür, dass unsere Vision auch nach außen sichtbar wird und wir uns als Marke professionell präsentieren.',
@@ -40,24 +42,39 @@ export default function Team() {
 
             {/* ══ Members ══ */}
             <div className="team-members">
-                {members.map((m, i) => (
-                    <div className="member-card" key={i}>
-                        <div className="member-photo-wrap">
-                            <img
-                                src={m.img}
-                                alt={m.name}
-                                className="member-photo"
-                                loading="lazy"
-                            />
-                        </div>
-                        <div className={`member-info${m.dark ? ' dark' : ''}`}>
-                            <h2 className="member-name">{m.role}</h2>
-                            <h2 className="member-name">{m.name}</h2>
-                            <p className="member-bio">{m.bio}</p>
-                            <p className="member-bio">{m.bio2}</p>
-                        </div>
+                <div className="member-card" key={members[0].id}>
+                    {/* CEO: Tatjana */}
+                    <div className="member-photo-wrap">
+                        <img
+                            src={members[0].img}
+                            alt={members[0].name}
+                            className="member-photo-ceo"
+                            loading="lazy"
+                        />
                     </div>
-                ))}
+                    <div className={`member-info${members[0].dark ? ' dark' : ''}`}>
+                        <h2 className="member-name">{members[0].role}</h2>
+                        <h2 className="member-name">{members[0].name}</h2>
+                        <p className="member-bio">{members[0].bio}</p>
+                        <p className="member-bio">{members[0].bio2}</p>
+                    </div>
+                </div>
+                <div className="member-card" key={members[1].id}>
+                    {/* CTO & CFO: Julian */}
+                    <div className="member-photo-wrap">
+                        <img
+                            src={members[1].img}
+                            alt={members[1].name}
+                            className="member-photo"
+                            loading="lazy"
+                        />
+                    </div>
+                    <div className={`member-info${members[1].dark ? ' dark' : ''}`}>
+                        <h2 className="member-name">{members[1].role}</h2>
+                        <h2 className="member-name">{members[1].name}</h2>
+                        <p className="member-bio">{members[1].bio}</p>
+                    </div>
+                </div>
             </div>
         </div>
     )
