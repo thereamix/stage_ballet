@@ -1,0 +1,20 @@
+@font-face {
+    font-family: 'AzeretMono';
+    src: url('./AzeretMono-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AlpinoBold';
+    src: url('./Alpino-Bold.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'AlpinoRegular';
+    src: url('./Alpino-Regular.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

@@ -1,0 +1,69 @@
+.home {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+}
+
+.home__bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('./images/homepage_background.png');
+    background-size: cover;
+    background-position: center top;
+    z-index: 0;
+}
+
+.home__content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 80px;
+    padding-bottom: 40px;
+    padding-top: 150px;
+}
+
+.home__heading {
+    width: clamp(320px, 42vw, 560px);
+    height: auto;
+    display: block;
+    margin-bottom: 40px;
+    user-select: none;
+    pointer-events: none;
+}
+
+.home__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 12px 28px;
+    margin-top: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 999px;
+    background: transparent;
+    color: #fff;
+    font-family: 'Azeret Mono', monospace;
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+            background 0.25s ease,
+            border-color 0.25s ease,
+            color 0.25s ease;
+}
+
+.home__btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+}
+
+.home__btn:active {
+    background: rgba(255, 255, 255, 0.18);
+}
