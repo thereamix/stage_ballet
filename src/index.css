@@ -133,7 +133,7 @@ img {
     display: block;
     width: 26px;
     height: 1.5px;
-    background: currentColor;
+    background: black;
     transition: transform 0.38s var(--ease-out), opacity 0.25s ease, width 0.3s ease;
     transform-origin: center;
 }
@@ -361,7 +361,7 @@ img {
     position: relative;
     z-index: 2;
     /* Gib dem Content links genug Luft zum Rand */
-    padding: 0 40px;
+    padding: 0 14px;
     color: var(--text-light);
     /* Text-Inhalt auch linksbündig: */
     text-align: left;
@@ -469,7 +469,8 @@ img {
     color: var(--black);
     letter-spacing: 0.04em;
     margin-bottom: 12px;
-    line-height: 1.1;
+    line-height: 1.35;
+    text-decoration: underline;
 }
 .course-card-text {
     font-size: 14px;

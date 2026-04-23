@@ -75,7 +75,7 @@ export default function HomePage() {
                     <h1 className="hero-headline">
                         <DeinTraum width={350} height={"auto"}/>
                     </h1>
-                    <Link to="/courses" className="btn btn-light">
+                    <Link to="/courses" className="btn btn-light" style={{fontSize: "11px", padding: "14px 16px"}}>
                         MITGLIED WERDEN
                     </Link>
                 </div>
